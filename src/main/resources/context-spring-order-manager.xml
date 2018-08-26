@@ -1,0 +1,25 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://camel.apache.org/schema/spring
+		http://camel.apache.org/schema/spring/camel-spring.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.order.manager" />
+
+    <camelContext id="orderAppCamel" xmlns="http://camel.apache.org/schema/spring">
+        <!--Package scan for auto discovery of routes (Should extend RouteBuilderClass-->
+        <!--<packageScan>-->
+            <!--<package>com.order.manager.routes</package>-->
+        <!--</packageScan>-->
+
+
+        <!-- Context Scan uses context tag of the Spring framework -->
+        <!-- It scans the folder & sub-folders of base-package -->
+        <!-- It initializes all routes extending SpringRouteBuilder -->
+        <contextScan />
+    </camelContext>
+    <context:annotation-config/>
+
+</beans>

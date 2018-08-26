@@ -1,6 +1,7 @@
 package com.order.manager.routes;
 
 import com.order.manager.processor.BadProcessor;
+import com.order.manager.processor.BadProcessorBean;
 import com.order.manager.processor.TxtProcessor;
 import com.order.manager.processor.WarehouseProcessor;
 import com.order.manager.processor.XmlProcessor;
@@ -14,6 +15,9 @@ import org.springframework.stereotype.Component;
 public class InRouteBuilder extends SpringRouteBuilder {
     @Autowired
     private BadProcessor badProcessor;
+
+    @Autowired
+    private BadProcessorBean badProcessorBean;
 
     @Autowired
     private TxtProcessor txtProcessor;
@@ -48,12 +52,13 @@ public class InRouteBuilder extends SpringRouteBuilder {
                 .to("file:order/warehouse");
 
         from("file:order/xml")
-                .process(xmlProcessor);
+                .bean(xmlProcessor);
 
         from("file:order/txt")
                 .process(txtProcessor);
 
         from("file:order/bad")
+                .bean(badProcessorBean)
                 .process(badProcessor);
 
         from("file:order/warehouse")
